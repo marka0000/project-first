@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Главная</title>
+	<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+	<div>
+		<div class="input">
+			<label for="name">Имя:</label>
+			<input type="text" name="name" id="name" />
+		</div>
+		<div class="input">
+			<label for="age">Возраст:</label>
+			<input type="text" name="age" id="age" />
+		</div>
+		<select class="input" name="city" id="city">
+			{% for element in Data %}
+			<option value="{{ element.id_city }}">{{ element.city }}</option>
+			{% endfor %}
+		</select>
+		<button class="input" id="button">Сохранить</button>
+	</div>
+	
+	<div class="table-users">
+		<div class="cell-main"><b>Имя</b></div>
+		<div class="cell-main"><b>Возраст</b></div>
+		<div class="cell-main"><b>Город</b></div>
+	</div>
+	<br />
+	<div class="table-users" id="first"></div>
+
+<script src="../js/jquery-3.4.1.min.js"></script>
+<script src="../js/form.js"></script>
+</body>
+</html>
