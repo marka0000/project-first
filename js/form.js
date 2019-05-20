@@ -16,16 +16,20 @@ $(document).ready(function() {
 		var name = $('#name').val();
 		var age = $('#age').val();
 		var city = $('#city').val();
+		var fail = '';
 
-		// var fail = '';
-		// if (name.length < 2) fail = 'Имя меньше 4 символов';
-		// else if (age<10) fail = 'Вы ввели возраст меньше 10 лет';
+		$('#errorMessage').hide();
+		if (name == '') fail = 'Введите свое имя';
+		else if (name.length < 2) fail = 'Имя меньше 2 букв';
+		else if (age == '') fail = 'Введите свой возраст';
+		else if (age<10 || age>100) fail = 'Введите свой возраст от 10 до 100 лет';
+		else if (city == 0) fail = 'Выберите свой город';
+		if (fail != '') {
+			$('#errorMessage').html (fail);
+			$('#errorMessage').show();
+			return false;
+		}
 
-		// if (fail != '') {
-		// 	$('#messageShow').html (fail + "<div class='clear'><br /></div>");
-		// 	$('#messageShow').show();
-		// 	return false;
-		// }
 		$.ajax({
 			url: 'Main/ajaxForm',
 			type: 'POST',
@@ -33,6 +37,9 @@ $(document).ready(function() {
 		}).done(function(result) {
 			console.log(result);
 		});
+		name = $('#name').val('');	// очищаем поля ввода после сохранения
+		age = $('#age').val('');
+		city = $('#city').val(0);
 		return false;
 	});
 
@@ -49,6 +56,7 @@ $(document).ready(function() {
 				}
 			}
 		});
+		return false;
 	});
 });
 

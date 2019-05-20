@@ -8,7 +8,7 @@
 
 	<div>
 		<div class="input">
-			<label for="name">Имя:</label>
+			<label for="name" id="label-name">Имя:</label>
 			<input type="text" name="name" id="name" />
 		</div>
 		<div class="input">
@@ -16,11 +16,14 @@
 			<input type="text" name="age" id="age" />
 		</div>
 		<select class="input" name="city" id="city">
+			<option value="0" checked>-выберите город-</option>
 			{% for element in Data %}
 			<option value="{{ element.id_city }}">{{ element.city }}</option>
 			{% endfor %}
 		</select>
 		<button class="input" id="button">Сохранить</button>
+		<br />
+		<div id="errorMessage"></div>
 	</div>
 	
 	<div class="table-users">
