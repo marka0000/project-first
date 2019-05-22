@@ -17,10 +17,11 @@
 		</div>
 		<select class="input" name="city" id="city">
 			<option value="0" checked>-выберите город-</option>
-			{% for element in Data %}
+			{% for element in City %}
 			<option value="{{ element.id_city }}">{{ element.city }}</option>
 			{% endfor %}
 		</select>
+
 		<button class="input" id="button">Сохранить</button>
 		<br />
 		<div id="errorMessage"></div>
@@ -30,9 +31,12 @@
 		<div class="cell-main"><b>Имя</b></div>
 		<div class="cell-main"><b>Возраст</b></div>
 		<div class="cell-main"><b>Город</b></div>
+		{% for element in Table %}
+			<div class="cell">{{ element.name }}</div>
+			<div class="cell">{{ element.age }}</div>
+			<div class="cell" id="cell">{{ element.city }}</div>
+		{% endfor %}
 	</div>
-	<br />
-	<div class="table-users" id="first"></div>
 
 <script src="../js/jquery-3.4.1.min.js"></script>
 <script src="../js/form.js"></script>

@@ -8,7 +8,6 @@ class Main_Controller {
 
 	public function __construct() {
 		$this->model = new Main_Model();
-		$this->view = new View();
 		Twig_Autoloader::register();
 		$loader = new Twig_Loader_Filesystem('./templates');
 		$this->twig = new Twig_Environment($loader);
@@ -16,8 +15,9 @@ class Main_Controller {
 
 
 	public function index() {
-		$pageData = $this->model->outCityDB();
-		echo $this->twig->render('main.html', ['Data' => $pageData]);
+		$cityData = $this->model->outCityDB();
+		$tableData = $this->model->outTableDB();
+		echo $this->twig->render('main.html', ['City' => $cityData, 'Table' => $tableData]);
 		exit;
 	}
 
@@ -33,28 +33,14 @@ class Main_Controller {
 		$name = (string) $_POST['name'];
 		$age = (int) $_POST['age'];
 		$city = (int) $_POST['city'];
-		if (!empty($name) && !empty($age)) {
+		if (!empty($name) && !empty($age) && !empty($city)) {
 			$this->model->addUsersDB($name, $age, $city);
 			$res = true;
-			$result = json_encode($res);
-			echo $result;
+			echo json_encode($res);
 			exit;
 		} else {
 			echo json_encode(['result' => false]);
 			exit;
 		}
 	}
-
-
-	/**
-	 * Аякс метод получения таблицы с данными
-	 *
-	 * @author Кирилл Маркин
-	 * @version 1.0, 16.05.2019 
-	 *
-	 */
-	public function ajaxOutTable() {
-		$this->model->outTableDB();
-	}
-
 }
